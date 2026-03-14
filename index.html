@@ -46,6 +46,32 @@
     <p>Interested in my cloud journey? Follow my progress!</p>
     <p>Domain: <strong>sirchuks.com</strong></p>
 </div>
-<p>Views: <span id="counter">0</span></p>
+
+<p>Total Views: <span id="counter">0</span></p>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        getVisitCount();
+    });
+
+    const functionApi = "https://sirchuks-counter-emfefzhtesb0hvep.eastus-01.azurewebsites.net/api/getresumecounterR_URL_HERE"; 
+
+    const getVisitCount = () => {
+        let count = 30; // Default fallback
+        fetch(functionApi)
+            .then(response => {
+                return response.json()
+            })
+            .then(response => {
+                console.log("Website called function API.");
+                count = response.count;
+                document.getElementById('counter').innerText = count;
+            }).catch(function(error) {
+                console.log(error);
+            });
+        return count;
+    }
+</script>
+
 </body>
 </html>
